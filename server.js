@@ -48,6 +48,7 @@ app.disable("x-powered-by");
 
 app.use(
   helmet({
+    referrerPolicy: { policy: "same-origin" },
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
@@ -85,6 +86,10 @@ app.use(flash());
 // Defesa extra contra CSRF: requisições que alteram dados precisam vir do próprio site.
 app.use((req, res, next) => {
   if (["GET", "HEAD", "OPTIONS"].includes(req.method)) return next();
+  const fetchSite = req.get("sec-fetch-site");
+  if (fetchSite) {
+    return fetchSite === "same-origin" ? next() : res.status(403).send("Requisição bloqueada.");
+  }
   const origem = req.get("origin") || req.get("referer");
   if (origem) {
     try {
