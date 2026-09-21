@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: praiana
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "1"
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ADMIN_USER
+        value: lana
+      - key: ADMIN_PASS_HASH
+        sync: false
+      - key: WHATSAPP_NUMERO
+        value: "559296051474"
+      - key: WHATSAPP_CATALOGO_URL
+        value: https://wa.me/c/559296051474
+      - key: INSTAGRAM_USUARIO
+        value: praianabylana
