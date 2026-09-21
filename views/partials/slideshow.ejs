@@ -1,0 +1,13 @@
+<div class="vitrine-slideshow <%= typeof arco !== 'undefined' && arco ? 'arco' : '' %>" data-slideshow>
+  <% slidesVitrine.forEach(function(s, i) { %>
+    <div class="slide <%= i === 0 ? 'ativo' : '' %>">
+      <img src="<%= s.imagem %>" alt="<%= s.frase %>" loading="<%= i === 0 ? 'eager' : 'lazy' %>">
+      <div class="slide-frase"><p><%= s.frase %></p></div>
+    </div>
+  <% }) %>
+  <div class="slide-dots">
+    <% slidesVitrine.forEach(function(s, i) { %>
+      <button type="button" class="dot <%= i === 0 ? 'ativo' : '' %>" data-index="<%= i %>" aria-label="Ver slide <%= i + 1 %>"></button>
+    <% }) %>
+  </div>
+</div>

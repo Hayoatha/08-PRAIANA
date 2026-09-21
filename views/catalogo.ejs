@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<%- include('partials/header') %>
+
+<section class="catalogo-intro">
+  <div class="container">
+    <div class="catalogo-intro-grid">
+      <div>
+        <span class="overline">Coleção Completa</span>
+        <h2 class="section-title">Nosso Catálogo</h2>
+        <p class="section-sub">Encontre a peça perfeita para você</p>
+        <p class="section-sub">Para mais produtos, chame no WhatsApp e peça o catálogo completo.</p>
+        <a href="<%= site.whatsappCatalogo %>" target="_blank" rel="noopener" class="btn btn-dark">Ver catálogo no WhatsApp</a>
+      </div>
+      <div class="hero-vitrine">
+        <%- include('partials/slideshow') %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="faixa-categorias">
+      <a href="/catalogo" class="<%= categoriaFiltro === '' ? 'active' : '' %>">Todos</a>
+      <% categorias.forEach(function(c) { %>
+        <a href="/catalogo?categoria=<%= encodeURIComponent(c) %>" class="<%= categoriaFiltro === c ? 'active' : '' %>"><%= c %></a>
+      <% }) %>
+    </div>
+
+    <% if (produtos.length === 0) { %>
+      <div class="vazio">
+        <p>Nenhuma peça encontrada nessa categoria no momento.</p>
+      </div>
+    <% } else { %>
+      <div class="grid-produtos">
+        <% produtos.forEach(function(p) { %>
+          <div class="card-produto">
+            <div class="imagem">
+              <% if (p.imagens && p.imagens.length) { %>
+                <img src="<%= p.imagens[0] %>" alt="<%= p.nome %>">
+              <% } %>
+              <span class="badge-categoria"><%= p.categoria %></span>
+            </div>
+            <div class="info">
+              <h3><%= p.nome %></h3>
+              <% if (p.descricao) { %>
+                <p class="descricao"><%= p.descricao %></p>
+              <% } %>
+              <% if (p.tamanhos && p.tamanhos.length) { %>
+                <div class="tamanhos">Tamanhos: <%= p.tamanhos.join(', ') %></div>
+              <% } %>
+              <div class="precos">
+                <% if (p.precoPromocional) { %>
+                  <span class="preco-antigo">R$ <%= p.preco.toFixed(2).replace('.', ',') %></span>
+                  <span class="preco-atual">R$ <%= p.precoPromocional.toFixed(2).replace('.', ',') %></span>
+                <% } else { %>
+                  <span class="preco-atual">R$ <%= p.preco.toFixed(2).replace('.', ',') %></span>
+                <% } %>
+              </div>
+              <div class="whatsapp-link">
+                <a class="btn btn-primary btn-sm" target="_blank" rel="noopener"
+                   href="https://wa.me/<%= site.whatsapp %>?text=<%= encodeURIComponent('Olá! Tenho interesse na peça: ' + p.nome) %>">
+                  Quero essa
+                </a>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>

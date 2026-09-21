@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<%- include('../partials/head') %>
+</head>
+<body>
+<div class="pagina-login">
+  <div class="card-login">
+    <img src="/img/logo-dark.png" alt="<%= site.nome %>">
+    <h2>Área da Loja</h2>
+    <p style="font-size:0.85rem; color:#6b6a5f; margin-top:-6px; margin-bottom:20px;">Acesso restrito à proprietária</p>
+
+    <% if (error && error.length) { %>
+      <div class="alerta alerta-erro"><%= error[0] %></div>
+    <% } %>
+
+    <form method="POST" action="/admin/login">
+      <div class="campo">
+        <label for="usuario">Usuário</label>
+        <input type="text" id="usuario" name="usuario" autocomplete="username" required autofocus>
+      </div>
+      <div class="campo">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">Entrar</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

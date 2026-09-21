@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<%- include('partials/head') %>
+</head>
+<body>
+<%- include('partials/header') %>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-texto">
+      <img src="/img/logo-dark.png" alt="<%= site.nome %>" class="hero-logo">
+      <span class="overline">Coleção Verão</span>
+      <h1 class="hero-titulo">Peças pensadas para valorizar <em>cada curva</em></h1>
+      <p>Biquínis e moda praia autorais, com leveza, conforto e muito estilê.</p>
+      <div class="hero-botoes">
+        <a href="/catalogo" class="btn btn-outline">Ver Catálogo</a>
+        <a href="<%= site.whatsappCatalogo %>" target="_blank" rel="noopener" class="btn btn-primary">Catálogo no WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-vitrine">
+      <%- include('partials/slideshow', { arco: true }) %>
+      <div class="selo-circular">
+        <img src="/img/logo-icon-raw.png" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2 class="section-title" style="text-align:center;">Explore por categoria</h2>
+    <p class="section-sub">Cada categoria pensada para um momento diferente do seu verão</p>
+
+    <div class="categorias-grid">
+      <% categoriasVitrine.forEach(function(c) { %>
+        <a class="categoria-tile" href="/catalogo?categoria=<%= encodeURIComponent(c.nome) %>">
+          <div class="conteudo">
+            <h3><%= c.nome %></h3>
+            <p><%= c.frase %></p>
+            <span class="seta">Ver peças →</span>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--cream-soft);">
+  <div class="container">
+    <h2 class="section-title" style="text-align:center;">Peças em destaque</h2>
+    <p class="section-sub">Selecionadas com carinho para você</p>
+
+    <% if (destaques.length === 0) { %>
+      <div class="vazio">
+        <p>Em breve novas peças por aqui. Fique de olho! ✨</p>
+      </div>
+    <% } else { %>
+      <div class="grid-produtos">
+        <% destaques.forEach(function(p) { %>
+          <div class="card-produto">
+            <div class="imagem">
+              <% if (p.imagens && p.imagens.length) { %>
+                <img src="<%= p.imagens[0] %>" alt="<%= p.nome %>">
+              <% } %>
+              <span class="badge-categoria"><%= p.categoria %></span>
+            </div>
+            <div class="info">
+              <h3><%= p.nome %></h3>
+              <% if (p.tamanhos && p.tamanhos.length) { %>
+                <div class="tamanhos">Tamanhos: <%= p.tamanhos.join(', ') %></div>
+              <% } %>
+              <div class="precos">
+                <% if (p.precoPromocional) { %>
+                  <span class="preco-antigo">R$ <%= p.preco.toFixed(2).replace('.', ',') %></span>
+                  <span class="preco-atual">R$ <%= p.precoPromocional.toFixed(2).replace('.', ',') %></span>
+                <% } else { %>
+                  <span class="preco-atual">R$ <%= p.preco.toFixed(2).replace('.', ',') %></span>
+                <% } %>
+              </div>
+              <div class="whatsapp-link">
+                <a class="btn btn-primary btn-sm" target="_blank" rel="noopener"
+                   href="https://wa.me/<%= site.whatsapp %>?text=<%= encodeURIComponent('Olá! Tenho interesse na peça: ' + p.nome) %>">
+                  Quero essa
+                </a>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+      <div style="text-align:center; margin-top:44px;">
+        <a href="/catalogo" class="btn btn-dark">Ver catálogo completo</a>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<section>
+  <div class="container marca-banner-grid">
+    <div class="marca-banner-imagem">
+      <img src="/img/slides/slide-4.jpg" alt="Peça Praiana by Lana">
+    </div>
+    <div>
+      <span class="overline">Por que a Praiana</span>
+      <h2 class="section-title" style="text-align:left;">Feito com cuidado, do início ao fim</h2>
+      <ul class="lista-valores">
+        <% valoresMarca.forEach(function(v) { %>
+          <li><%= v %></li>
+        <% }) %>
+      </ul>
+      <a href="<%= site.whatsappCatalogo %>" target="_blank" rel="noopener" class="btn btn-dark">Ver catálogo no WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+
+<section class="cta-whatsapp">
+  <div class="container">
+    <span class="overline overline-claro" style="text-align:center; display:block;">Fale com a gente</span>
+    <h2>Pronta para arrasar ?</h2>
+    <p>Chama no WhatsApp e garanta sua peça favorita antes que acabe o tamanho.</p>
+    <a href="<%= site.whatsappCatalogo %>" target="_blank" rel="noopener" class="btn btn-primary">Ver catálogo no WhatsApp</a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>

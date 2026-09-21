@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<%- include('../partials/head') %>
+</head>
+<body>
+<div class="admin-topbar">
+  <div class="container">
+    <a href="/admin" class="marca">Painel · <%= site.nome %></a>
+    <div style="display:flex; align-items:center; gap:16px;">
+      <a href="/" target="_blank" style="font-size:0.85rem;">Ver site &#8599;</a>
+      <form method="POST" action="/admin/logout">
+        <button type="submit" class="btn btn-outline btn-sm" style="border-color:#fffdf9cc;">Sair</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="admin-wrap">
+  <div class="container">
+
+    <% if (success && success.length) { %>
+      <div class="alerta alerta-sucesso"><%= success[0] %></div>
+    <% } %>
+    <% if (error && error.length) { %>
+      <div class="alerta alerta-erro"><%= error[0] %></div>
+    <% } %>
+
+    <div class="admin-header">
+      <h1>Produtos</h1>
+      <a href="/admin/produtos/novo" class="btn btn-primary">+ Novo produto</a>
+    </div>
+
+    <% if (produtos.length === 0) { %>
+      <div class="vazio-admin">
+        <p>Nenhum produto cadastrado ainda.</p>
+        <a href="/admin/produtos/novo" class="btn btn-dark" style="margin-top:12px;">Cadastrar primeiro produto</a>
+      </div>
+    <% } else { %>
+      <div style="overflow-x:auto;">
+      <table class="tabela-produtos">
+        <thead>
+          <tr>
+            <th>Foto</th>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Preço</th>
+            <th>Status</th>
+            <th>Destaque</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% produtos.forEach(function(p) { %>
+            <tr>
+              <td>
+                <% if (p.imagens && p.imagens.length) { %>
+                  <img class="thumb" src="<%= p.imagens[0] %>" alt="">
+                <% } else { %>
+                  <div class="thumb"></div>
+                <% } %>
+              </td>
+              <td><%= p.nome %></td>
+              <td><%= p.categoria %></td>
+              <td>
+                R$ <%= p.preco.toFixed(2).replace('.', ',') %>
+                <% if (p.precoPromocional) { %>
+                  <br><small style="color:var(--terracota-dark);">Promo: R$ <%= p.precoPromocional.toFixed(2).replace('.', ',') %></small>
+                <% } %>
+              </td>
+              <td>
+                <span class="pill <%= p.ativo ? 'pill-ativo' : 'pill-inativo' %>">
+                  <%= p.ativo ? 'Visível' : 'Oculto' %>
+                </span>
+              </td>
+              <td><%= p.destaque ? '★' : '—' %></td>
+              <td>
+                <div class="acoes-tabela">
+                  <a href="/admin/produtos/<%= p.id %>/editar" class="btn btn-outline btn-sm" style="border-color:var(--ink); color:var(--ink);">Editar</a>
+                  <form method="POST" action="/admin/produtos/<%= p.id %>/excluir" data-confirm="Tem certeza que deseja excluir este produto?">
+                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      </div>
+    <% } %>
+  </div>
+</div>
+<script src="/js/main.js"></script>
+</body>
+</html>
