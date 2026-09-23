@@ -4,6 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const express = require("express");
 const session = require("express-session");
+const MemoryStore = require("memorystore")(session);
 const flash = require("connect-flash");
 const bcrypt = require("bcryptjs");
 const rateLimit = require("express-rate-limit");
@@ -68,16 +69,22 @@ app.use(
 app.use(express.urlencoded({ extended: false, limit: "50kb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
+const SESSION_MAX_AGE = 1000 * 60 * 60 * 8;
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    // Evita o vazamento de memória do MemoryStore padrão: sessões expiradas
+    // são removidas periodicamente. Como a hospedagem roda uma única
+    // instância, não precisa de um banco externo para isso.
+    store: new MemoryStore({ checkPeriod: 1000 * 60 * 60, ttl: SESSION_MAX_AGE }),
     cookie: {
       httpOnly: true,
       sameSite: "strict",
       secure: IS_PROD,
-      maxAge: 1000 * 60 * 60 * 8,
+      maxAge: SESSION_MAX_AGE,
     },
   })
 );
