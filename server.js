@@ -120,7 +120,7 @@ const ENDERECO_LOJA = "Tv. São Geraldo, 48B - São Geraldo, Manaus - AM, 69053-
 
 // URL pública e definitiva do site (sem barra no final), usada no sitemap.xml
 // e no robots.txt. Configure SITE_URL no .env quando o domínio for definido.
-const SITE_URL = (process.env.SITE_URL || "https://praianabylana.com.br").replace(/\/+$/, "");
+const SITE_URL = (process.env.SITE_URL || "https://www.praianabylana.com.br").replace(/\/+$/, "");
 
 app.locals.site = {
   nome: "Praiana by Lana",

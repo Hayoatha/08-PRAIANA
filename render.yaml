@@ -24,4 +24,4 @@ services:
       - key: INSTAGRAM_USUARIO
         value: praianabylana
       - key: SITE_URL
-        value: https://praianabylana.com.br
+        value: https://www.praianabylana.com.br
