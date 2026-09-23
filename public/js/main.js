@@ -48,4 +48,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
     iniciarAuto();
   });
+
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+  const lightboxFechar = document.getElementById("lightboxFechar");
+
+  if (lightbox && lightboxImg) {
+    function abrirLightbox(img) {
+      lightboxImg.src = img.currentSrc || img.src;
+      lightboxImg.alt = img.alt || "";
+      lightbox.hidden = false;
+      document.body.style.overflow = "hidden";
+    }
+
+    function fecharLightbox() {
+      lightbox.hidden = true;
+      lightboxImg.src = "";
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll("img.foto-zoom").forEach((img) => {
+      img.addEventListener("click", () => abrirLightbox(img));
+      img.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          abrirLightbox(img);
+        }
+      });
+    });
+
+    lightbox.addEventListener("click", fecharLightbox);
+    lightboxFechar.addEventListener("click", (e) => {
+      e.stopPropagation();
+      fecharLightbox();
+    });
+    lightboxImg.addEventListener("click", (e) => e.stopPropagation());
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !lightbox.hidden) fecharLightbox();
+    });
+  }
 });

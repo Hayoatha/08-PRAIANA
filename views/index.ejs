@@ -61,7 +61,7 @@
           <div class="card-produto">
             <div class="imagem">
               <% if (p.imagens && p.imagens.length) { %>
-                <img src="<%= p.imagens[0] %>" alt="<%= p.nome %>">
+                <img src="<%= p.imagens[0] %>" alt="<%= p.nome %>" class="foto-zoom" tabindex="0" role="button" aria-label="Ampliar foto de <%= p.nome %>">
               <% } %>
               <span class="badge-categoria"><%= p.categoria %></span>
             </div>

@@ -613,6 +613,54 @@ section { padding: 64px 0; }
   object-fit: cover;
 }
 
+.card-produto .imagem img.foto-zoom {
+  cursor: zoom-in;
+  transition: transform 0.35s ease;
+}
+
+.card-produto:hover .imagem img.foto-zoom {
+  transform: scale(1.06);
+}
+
+/* -------- Lightbox (ampliar foto do produto) -------- */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: rgba(20, 20, 15, 0.92);
+  cursor: zoom-out;
+}
+
+.lightbox[hidden] { display: none; }
+
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  cursor: default;
+}
+
+.lightbox-fechar {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 2.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+.lightbox-fechar:hover { color: var(--terracota); }
+
 .badge-categoria {
   position: absolute;
   top: 12px;
