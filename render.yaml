@@ -23,3 +23,5 @@ services:
         value: https://wa.me/c/559296051474
       - key: INSTAGRAM_USUARIO
         value: praianabylana
+      - key: SITE_URL
+        value: https://praianabylana.com.br

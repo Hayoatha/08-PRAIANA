@@ -118,8 +118,13 @@ const CATEGORIAS = ["Biquíni", "Maiô", "Saída de Praia", "Acessórios"];
 
 const ENDERECO_LOJA = "Tv. São Geraldo, 48B - São Geraldo, Manaus - AM, 69053-310";
 
+// URL pública e definitiva do site (sem barra no final), usada no sitemap.xml
+// e no robots.txt. Configure SITE_URL no .env quando o domínio for definido.
+const SITE_URL = (process.env.SITE_URL || "https://praianabylana.com.br").replace(/\/+$/, "");
+
 app.locals.site = {
   nome: "Praiana by Lana",
+  url: SITE_URL,
   whatsapp: process.env.WHATSAPP_NUMERO || "5500000000000",
   whatsappCatalogo: process.env.WHATSAPP_CATALOGO_URL || "https://wa.me/c/5500000000000",
   instagram: process.env.INSTAGRAM_USUARIO || "praianabylana",
@@ -231,6 +236,39 @@ app.get("/", (req, res) => {
     titulo: "Praiana by Lana",
     destaques: destaques.length ? destaques : produtos.slice(0, 6),
   });
+});
+
+app.get("/robots.txt", (req, res) => {
+  res.type("text/plain").send(
+    ["User-agent: *", "Disallow: /admin", "", `Sitemap: ${SITE_URL}/sitemap.xml`, ""].join("\n")
+  );
+});
+
+app.get("/sitemap.xml", (req, res) => {
+  const hoje = new Date().toISOString().slice(0, 10);
+
+  const paginas = [
+    { loc: "/", prioridade: "1.0" },
+    { loc: "/catalogo", prioridade: "0.9" },
+    ...CATEGORIAS.map((c) => ({
+      loc: `/catalogo?categoria=${encodeURIComponent(c)}`,
+      prioridade: "0.6",
+    })),
+  ];
+
+  const urls = paginas
+    .map(
+      (p) => `  <url>
+    <loc>${SITE_URL}${p.loc}</loc>
+    <lastmod>${hoje}</lastmod>
+    <priority>${p.prioridade}</priority>
+  </url>`
+    )
+    .join("\n");
+
+  res.type("application/xml").send(
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
+  );
 });
 
 app.get("/catalogo", (req, res) => {
