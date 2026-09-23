@@ -2,11 +2,20 @@ services:
   - type: web
     name: praiana
     runtime: node
-    plan: free
+    # ATENÇÃO: confirme se este é o nome exato do plano pago escolhido no
+    # dashboard do Render (ex: starter). O plano "free" não suporta disco
+    # persistente, então esse valor precisa bater com o plano ativo.
+    plan: starter
     buildCommand: npm ci
     startCommand: npm start
     healthCheckPath: /
+    disk:
+      name: praiana-dados
+      mountPath: /var/data
+      sizeGB: 1
     envVars:
+      - key: DATA_DIR
+        value: /var/data
       - key: NODE_ENV
         value: production
       - key: TRUST_PROXY

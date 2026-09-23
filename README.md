@@ -97,7 +97,25 @@ Ao publicar:
 
 1. Configure as variáveis de ambiente do `.env` no painel do serviço escolhido
    (nunca envie o arquivo `.env` para repositórios públicos).
-2. Garanta que a pasta `public/uploads` seja persistente (alguns serviços
-   gratuitos apagam arquivos a cada deploy — nesse caso vale usar um "disk"
-   persistente ou trocar para armazenamento externo no futuro).
-3. Rode `npm install` e `npm start` no servidor.
+2. Rode `npm install` e `npm start` no servidor.
+
+### Persistência dos dados (catálogo e fotos)
+
+Por padrão, os produtos ficam em `data/products.json` e as fotos em
+`public/uploads/` — dentro da própria pasta do projeto. Isso é ótimo para
+desenvolvimento, mas a maioria das hospedagens (inclusive o Render) apaga
+esses arquivos a cada novo deploy, porque recriam a pasta do zero.
+
+Para evitar isso, configure a variável `DATA_DIR` apontando para um disco
+persistente (uma pasta que sobrevive aos deploys). Quando `DATA_DIR` está
+definida, o site passa a gravar tudo lá dentro automaticamente:
+
+- `$DATA_DIR/products.json`
+- `$DATA_DIR/uploads/`
+
+No **Render**, isso já está configurado em [render.yaml](render.yaml): o
+disco é montado em `/var/data` e `DATA_DIR=/var/data` é definida sozinha no
+deploy. Só funciona em planos pagos (o plano free não suporta disco).
+
+Sem `DATA_DIR`, o site funciona normalmente, só que os dados não sobrevivem
+a um novo deploy — útil apenas para testes rápidos.

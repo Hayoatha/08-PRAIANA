@@ -3,7 +3,11 @@ const sharp = require("sharp");
 const path = require("path");
 const crypto = require("crypto");
 
-const UPLOAD_DIR = path.join(__dirname, "..", "public", "uploads");
+// Mesma lógica do utils/store.js: usa o disco persistente quando DATA_DIR
+// estiver configurado (produção), senão fica dentro de public/ (dev local).
+const UPLOAD_DIR = process.env.DATA_DIR
+  ? path.join(process.env.DATA_DIR, "uploads")
+  : path.join(__dirname, "..", "public", "uploads");
 
 const TIPOS_PERMITIDOS = new Set(["image/jpeg", "image/png", "image/webp"]);
 

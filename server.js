@@ -68,6 +68,9 @@ app.use(
 
 app.use(express.urlencoded({ extended: false, limit: "50kb" }));
 app.use(express.static(path.join(__dirname, "public")));
+// Rota dedicada: funciona tanto em dev (uploads dentro de public/) quanto em
+// produção, onde UPLOAD_DIR fica fora de public/, no disco persistente.
+app.use("/uploads", express.static(UPLOAD_DIR));
 
 const SESSION_MAX_AGE = 1000 * 60 * 60 * 8;
 

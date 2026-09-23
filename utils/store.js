@@ -1,7 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 
-const DATA_FILE = path.join(__dirname, "..", "data", "products.json");
+// Em produção (Render), DATA_DIR aponta para o disco persistente, para o
+// catálogo sobreviver a cada deploy. Sem essa variável, usa a pasta local
+// do projeto (bom para desenvolvimento, mas apagado a cada deploy).
+const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, "..", "data");
+const DATA_FILE = path.join(DATA_DIR, "products.json");
 
 function ensureFile() {
   if (!fs.existsSync(DATA_FILE)) {
