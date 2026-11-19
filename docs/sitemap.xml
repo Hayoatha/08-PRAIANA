@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://praianabylana.com.br/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://praianabylana.com.br/catalogo</loc>
+    <lastmod>2026-11-19</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://praianabylana.com.br/catalogo?categoria=Biqu%C3%ADni</loc>
+    <lastmod>2026-11-19</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://praianabylana.com.br/catalogo?categoria=Mai%C3%B4</loc>
+    <lastmod>2026-11-19</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://praianabylana.com.br/catalogo?categoria=Sa%C3%ADda%20de%20Praia</loc>
+    <lastmod>2026-11-19</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://praianabylana.com.br/catalogo?categoria=Acess%C3%B3rios</loc>
+    <lastmod>2026-11-19</lastmod>
+    <priority>0.6</priority>
+  </url>
+</urlset>

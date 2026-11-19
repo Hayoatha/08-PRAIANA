@@ -32,6 +32,10 @@
       <% }) %>
     </div>
 
+    <div class="vazio" id="vazioFiltro" hidden>
+      <p>Nenhuma peça encontrada nessa categoria no momento.</p>
+    </div>
+
     <% if (produtos.length === 0) { %>
       <div class="vazio">
         <p>Nenhuma peça encontrada nessa categoria no momento.</p>
@@ -39,7 +43,7 @@
     <% } else { %>
       <div class="grid-produtos">
         <% produtos.forEach(function(p) { %>
-          <div class="card-produto">
+          <div class="card-produto" data-categoria="<%= p.categoria %>">
             <div class="imagem">
               <% if (p.imagens && p.imagens.length) { %>
                 <img src="<%= p.imagens[0] %>" alt="<%= p.nome %>" class="foto-zoom" tabindex="0" role="button" aria-label="Ampliar foto de <%= p.nome %>">

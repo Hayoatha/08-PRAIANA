@@ -1,55 +1,34 @@
 # Contexto — Praiana by Lana (colar em chat novo)
 
-**Projeto:** site de catálogo da loja de biquínis Praiana by Lana. Pasta local:
-`C:\Users\hayoa\OneDrive\ARQUIVOS\04 - VISUAL STUDIO\02 - PROJETO SITES\08 - PRAIANA`.
-Repo: `github.com/Hayoatha/08-PRAIANA` (privado). Deploy: Render (plano pago
-"Starter"), domínio `www.praianabylana.com.br` (raiz redireciona pro www).
+**Projeto:** site de catálogo da loja de biquínis Praiana by Lana. **Site 100%
+estático** no GitHub Pages (`main`, pasta `/docs`), domínio
+`praianabylana.com.br`. Repo: `github.com/Hayoatha/08-PRAIANA`. Pasta local:
+`...\04 - VISUAL STUDIO\02 - PROJETO SITES\08 - PRAIANA`. (Até 2026-11 era
+Express + painel admin no Render; essa versão está no histórico do Git.)
 
-**Stack:** Node >=20, Express 4, EJS (SSR, sem frontend framework). "Banco"
-= `data/products.json` via `utils/store.js` (CRUD + escrita atômica). Sessão
-= `express-session` + `memorystore` (evita leak do MemoryStore padrão).
-Upload = `multer` (memória) + `sharp` (valida conteúdo real, remove
-EXIF/GPS, redimensiona, regrava JPEG). Segurança = `helmet`, `bcryptjs`,
-`express-rate-limit` no login, CSRF caseiro (checa `Sec-Fetch-Site`/Origin).
+**Stack:** Node >=20, EJS (só no build), sem framework. `npm run build`
+(`scripts/build.js`) lê `data/products.json` + `site.config.js`, renderiza
+`views/{index,catalogo,404}.ejs` e escreve `docs/` (HTML, sitemap.xml,
+robots.txt, CNAME, .nojekyll) copiando `public/` (css, js, img, uploads).
+`npm run preview` serve `docs/` em localhost:8080 imitando o GitHub Pages.
 
-**Arquivos-chave:** `server.js` (tudo: rotas + middlewares + config, sem
-router separado), `utils/store.js` (dados), `middleware/upload.js` (fotos),
-`middleware/auth.js` (`requireAuth`), `views/` (EJS: index, catalogo, 404,
-admin/{login,dashboard,produto-form}, partials/{head,header,footer,slideshow}),
-`public/` (css/js/logos/slides/uploads), `render.yaml` (Blueprint deploy).
+**Arquivos-chave:** `site.config.js` (nome, WhatsApp, Instagram, endereço,
+slides, categorias, DOMINIO), `data/products.json` (catálogo),
+`views/` (templates), `public/` (assets + `uploads/` com fotos dos produtos),
+`scripts/build.js`, `docs/` (saída gerada, não editar à mão).
 
 **Produto:** `{id, nome, descricao, preco, precoPromocional, tamanhos[],
-categoria, imagens[] (até 6, /uploads/xxx.jpg), destaque, ativo, createdAt}`.
-Categorias fixas em `CATEGORIAS` (server.js): Biquíni, Maiô, Saída de Praia,
-Acessórios.
+categoria, imagens[] ("/uploads/x.jpg"), destaque, ativo, createdAt}`.
+Categorias: Biquíni, Maiô, Saída de Praia, Acessórios.
 
-**Rotas públicas:** `/`, `/catalogo?categoria=`, `/sitemap.xml`,
-`/robots.txt` (últimos dois gerados dinamicamente via `SITE_URL`).
-**Admin (requireAuth):** `/admin/login` (GET/POST), `/admin/logout` (POST),
-`/admin` (lista), `/admin/produtos/novo` (GET/POST), `/admin/produtos/:id/editar`
-(GET/POST), `/admin/produtos/:id/excluir` (POST). 1 usuário só (a proprietária).
+**Páginas:** `/` (home), `/catalogo` (= `catalogo.html`), `404.html`,
+`/sitemap.xml`, `/robots.txt`. `/catalogo?categoria=X` é filtrado no navegador
+por `public/js/main.js` (cards têm `data-categoria`).
 
-**Persistência em prod:** `DATA_DIR=/var/data` (env var, só setada no
-Render) redireciona `products.json` e `uploads/` para o disco persistente
-(1GB, configurado em `render.yaml`, snapshot automático a cada 24h). Sem
-`DATA_DIR` (dev local), tudo fica dentro do projeto e normalmente some a
-cada deploy em host efêmero — por isso a env var existe.
+**Atualizar catálogo:** foto em `public/uploads/` + editar
+`data/products.json` + `npm run build` + commit/push (Pages publica sozinho).
 
-**Env vars obrigatórias:** `SESSION_SECRET`, `ADMIN_USER`, `ADMIN_PASS_HASH`
-(gerar com `npm run setup-admin`, nunca commitar). **Opcionais/config:**
-`DATA_DIR`, `SITE_URL`, `TRUST_PROXY`, `WHATSAPP_NUMERO`,
-`WHATSAPP_CATALOGO_URL`, `INSTAGRAM_USUARIO`, `PORT`, `NODE_ENV`. Ver
-`.env.example`.
+**Cuidados:** repo público, então nunca versionar senhas/chaves/.env. Sem
+login, sem backend, sem cookies. Tamanho das fotos: JPG até ~1600 px, sem GPS.
 
-**Coisas para lembrar / pegadinhas já resolvidas:**
-- `helmet`'s `Referrer-Policy` já causou bug no CSRF check (Origin sumia) —
-  por isso a checagem usa `Sec-Fetch-Site` como primária.
-- `render.yaml` só sincroniza com o serviço já criado via **Manual Sync**
-  no dashboard do Render — push no GitHub sozinho não reaplica o YAML.
-- `plan: starter` no render.yaml é uma suposição do slug real do Render —
-  confirmar se bater errado num sync.
-- Sem testes automatizados; verificação é sempre manual (curl + browser).
-- `.gitignore` mantém fora do Git: `.env`, `data/products.json`,
-  `public/uploads/*`, `node_modules/`.
-
-**Documentação completa:** ver `ARQUITETURA.md` na raiz do projeto.
+**Docs completos:** `README.md` e `ARQUITETURA.md` na raiz.

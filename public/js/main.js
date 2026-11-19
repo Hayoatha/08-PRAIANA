@@ -5,11 +5,24 @@ document.addEventListener("DOMContentLoaded", () => {
     toggle.addEventListener("click", () => nav.classList.toggle("open"));
   }
 
-  document.querySelectorAll("form[data-confirm]").forEach((form) => {
-    form.addEventListener("submit", (e) => {
-      if (!confirm(form.dataset.confirm)) e.preventDefault();
+  // Catálogo: filtra por /catalogo?categoria=X no navegador (o site é estático).
+  const chips = document.querySelectorAll(".faixa-categorias a");
+  const cartoes = document.querySelectorAll(".card-produto[data-categoria]");
+  if (chips.length && cartoes.length) {
+    const escolhida = new URLSearchParams(location.search).get("categoria") || "";
+    let visiveis = 0;
+    cartoes.forEach((cartao) => {
+      const mostrar = !escolhida || cartao.dataset.categoria === escolhida;
+      cartao.style.display = mostrar ? "" : "none";
+      if (mostrar) visiveis++;
     });
-  });
+    chips.forEach((chip) => {
+      const categoriaDoChip = new URL(chip.href).searchParams.get("categoria") || "";
+      chip.classList.toggle("active", categoriaDoChip === escolhida);
+    });
+    const vazio = document.getElementById("vazioFiltro");
+    if (vazio) vazio.hidden = visiveis > 0;
+  }
 
   document.querySelectorAll("[data-slideshow]").forEach((container) => {
     const slides = Array.from(container.querySelectorAll(".slide"));

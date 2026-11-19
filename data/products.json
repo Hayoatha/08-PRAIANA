@@ -1,0 +1,204 @@
+[
+  {
+    "id": "81d9f55322",
+    "nome": "THAITI",
+    "descricao": "Sem bojo",
+    "preco": 119,
+    "precoPromocional": null,
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "categoria": "Maiô",
+    "imagens": [
+      "/uploads/81d9f55322918b58b63a45322f75e55f.jpg"
+    ],
+    "destaque": false,
+    "ativo": true,
+    "createdAt": 1795101774941
+  },
+  {
+    "id": "73013d49a6",
+    "nome": "SENHORITA",
+    "descricao": "Com aro , sem bojo , tanga fio",
+    "preco": 89,
+    "precoPromocional": null,
+    "tamanhos": [
+      "P",
+      "M"
+    ],
+    "categoria": "Biquíni",
+    "imagens": [
+      "/uploads/73013d49a6d49f83686c4ed6cf377201.jpg"
+    ],
+    "destaque": false,
+    "ativo": true,
+    "createdAt": 1795101773941
+  },
+  {
+    "id": "fe805dde2a",
+    "nome": "PALOMA",
+    "descricao": "Top sem bojo , tanga fio",
+    "preco": 90,
+    "precoPromocional": null,
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "categoria": "Biquíni",
+    "imagens": [
+      "/uploads/fe805dde2af3857fdd683f0f98a03bfd.jpg"
+    ],
+    "destaque": false,
+    "ativo": true,
+    "createdAt": 1795101772941
+  },
+  {
+    "id": "b37e078593",
+    "nome": "CLEO",
+    "descricao": "Top com bojo , tanga empina",
+    "preco": 90,
+    "precoPromocional": null,
+    "tamanhos": [
+      "M",
+      "G"
+    ],
+    "categoria": "Biquíni",
+    "imagens": [
+      "/uploads/b37e0785930d2ce601920cfd4b47db99.jpg"
+    ],
+    "destaque": true,
+    "ativo": true,
+    "createdAt": 1795101771941
+  },
+  {
+    "id": "03ed352827",
+    "nome": "CEREJA",
+    "descricao": "Sem bojo, tanga fio",
+    "preco": 99,
+    "precoPromocional": null,
+    "tamanhos": [
+      "P",
+      "M"
+    ],
+    "categoria": "Biquíni",
+    "imagens": [
+      "/uploads/03ed3528279f642b6e6c916e9ccd8d94.jpg"
+    ],
+    "destaque": false,
+    "ativo": true,
+    "createdAt": 1795101770941
+  },
+  {
+    "id": "6a02ba6825",
+    "nome": "BEL",
+    "descricao": "Top Sem bojo , tanga fio",
+    "preco": 99,
+    "precoPromocional": null,
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "categoria": "Biquíni",
+    "imagens": [
+      "/uploads/6a02ba6825b3962344091a210e1f8c95.jpg"
+    ],
+    "destaque": false,
+    "ativo": true,
+    "createdAt": 1795101769941
+  },
+  {
+    "id": "bc88acc6b2",
+    "nome": "ATHENA",
+    "descricao": "Sem bojo. Tanga fio",
+    "preco": 99,
+    "precoPromocional": null,
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "categoria": "Biquíni",
+    "imagens": [
+      "/uploads/bc88acc6b24f70e525ea8d6adec92609.jpg"
+    ],
+    "destaque": false,
+    "ativo": true,
+    "createdAt": 1795101768941
+  },
+  {
+    "id": "5976f247ec",
+    "nome": "HELENA",
+    "descricao": "Com bojo, fio",
+    "preco": 119,
+    "precoPromocional": null,
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "categoria": "Maiô",
+    "imagens": [
+      "/uploads/5976f247ec5f92df7842681af2263eb7.jpg"
+    ],
+    "destaque": true,
+    "ativo": true,
+    "createdAt": 1795101767941
+  },
+  {
+    "id": "3e076f18fc",
+    "nome": "CORTININHA",
+    "descricao": "Sem bojo, tanga fio",
+    "preco": 85,
+    "precoPromocional": null,
+    "tamanhos": [
+      "P",
+      "M",
+      "G"
+    ],
+    "categoria": "Biquíni",
+    "imagens": [
+      "/uploads/3e076f18fc68c03e884ebf5e9fb55c31.jpg"
+    ],
+    "destaque": true,
+    "ativo": true,
+    "createdAt": 1795101766941
+  },
+  {
+    "id": "1f904742fb",
+    "nome": "TRICO OFFWHITE",
+    "descricao": "",
+    "preco": 99,
+    "precoPromocional": null,
+    "tamanhos": [
+      "36 - 44"
+    ],
+    "categoria": "Saída de Praia",
+    "imagens": [
+      "/uploads/1f904742fbab058a3a637809f5a5f596.jpg"
+    ],
+    "destaque": true,
+    "ativo": true,
+    "createdAt": 1795101765941
+  },
+  {
+    "id": "c74576aefa",
+    "nome": "TRICO PRETA",
+    "descricao": "",
+    "preco": 99,
+    "precoPromocional": null,
+    "tamanhos": [
+      "36 - 44"
+    ],
+    "categoria": "Saída de Praia",
+    "imagens": [
+      "/uploads/c74576aefadab2c169116ad580b0db6a.jpg"
+    ],
+    "destaque": false,
+    "ativo": true,
+    "createdAt": 1795101764941
+  }
+]
